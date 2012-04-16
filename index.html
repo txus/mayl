@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mayl by txus</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Mayl</h1>
+        <p>A console to edit and maintain YAML files for any Ruby project</p>
+        <p class="view"><a href="https://github.com/txus/mayl">View the Project on GitHub <small>txus/mayl</small></a></p>
+        <ul>
+          <li><a href="https://github.com/txus/mayl/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/txus/mayl/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/txus/mayl">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>mayl - a YAML console</h1>
+
+<p>Mayl is an anagram of YAML, and also a console to create, edit and maintain
+YAML files in any kind of Ruby projects.</p>
+
+<h2>Warning: Not released yet</h2>
+
+<p>This is not a released project yet. It's just a Readme specification to define
+the API and some features. You'll see a usable version soon! ;)</p>
+
+<h2>Installation</h2>
+
+<p>Install mayl yourself:</p>
+
+<pre><code>$ gem install mayl
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>Mayl expects your YAML files to be organized like this: one file per locale
+(<code>en.yml</code>, <code>es.yml</code>, <code>ca.yml</code>...) in a directory.</p>
+
+<p>When it starts, it needs to know where to find all these YAML files, and it
+looks by default under <code>./config/locales</code> but you can always run it like <code>mayl
+some/other/dir</code> to override this.</p>
+
+<pre><code>$ mayl
+Detected locales: ca, en, es
+&gt;
+</code></pre>
+
+<p>Now we'll set a new key by typing <code>set KEY</code> and typing in the translations:</p>
+
+<pre><code>&gt; set activerecord.models.post
+  ca: Article
+  en: Post
+  es: Artículo
+
+  Set activerecord.models.post to Article (ca), Post (en) and Artículo (es)
+&gt;
+</code></pre>
+
+<p>Changes get written to the file immediately. We can consult a key any time,
+and in case we see any error, correct it quickly with <code>edit LOCALE NEWVALUE</code>:</p>
+
+<pre><code>&gt; get activerecord.models.post
+  ca: Article
+  en: Post
+  es: Artículo
+&gt; edit es Entrada
+
+  Set activerecord.models.post to Entrada (es)
+&gt;
+</code></pre>
+
+<h3>Namespaces</h3>
+
+<p>If you want to work for a while inside a namespace, let's say
+<code>activerecord.models</code>, you can do so by <code>cd</code>-ing into it, and even <code>ls</code> the
+existing keys:</p>
+
+<pre><code>&gt; cd activerecord.models
+activerecord.models &gt; get post
+  ca: Article
+  en: Post
+  es: Entrada
+activerecord.models &gt; cd ..
+activerecord &gt; ls
+models attributes
+activerecord &gt; cd ..
+&gt;
+</code></pre>
+
+<p>Cool way to navigate your YAML files huh?</p>
+
+<h3>Other useful commands</h3>
+
+<ul>
+<li>
+<code>reload</code>: Reloads the file in case someone has changed it for some reason
+(which ideally should not happen).</li>
+<li>
+<code>exit</code>: Exits the console.</li>
+</ul><h2>Development</h2>
+
+<p>To run the tests:</p>
+
+<pre><code>$ rake
+</code></pre>
+
+<p>To build the documentation under the <code>doc</code> directory:</p>
+
+<pre><code>$ rake doc
+</code></pre>
+
+<h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Added some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h2>Who's this</h2>
+
+<p>This was made by <a href="http://txustice.me">Josep M. Bach (Txus)</a> under the MIT
+license. I'm <a href="http://twitter.com/txustice">@txustice</a> on twitter (where you
+should probably follow me!).</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/txus">txus</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
