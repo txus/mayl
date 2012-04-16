@@ -18,5 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'yard'
   gem.add_development_dependency 'yard-tomdoc'
   gem.add_development_dependency 'redcarpet'
+
   gem.add_development_dependency 'minitest'
+  gem.add_development_dependency 'mocha'
 end
