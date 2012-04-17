@@ -18,12 +18,14 @@ module Mayl
     # Returns nothing.
     def start
       locales = @env.locales.map(&:name)
+      prompt = "> "
       puts "Detected locales: #{locales.join(', ')}"
-      while (print "> "; input = gets)
+      while (print prompt; input = gets)
         begin
           value = @parser.parse(input.chomp).execute
           @env.last_value = value
           @env.commit
+          prompt = [@env.namespace, '> '].reject(&:empty?).join ' '
         rescue => e
           print "Error: #{e.message}"
         ensure

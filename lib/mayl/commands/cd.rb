@@ -1,10 +1,10 @@
 module Mayl
   module Commands
-    # Public: The Cd command enters in a YAML namespace.
+    # Public: The Cd command navigates through YAML namespaces.
     #
     # Example
     # 
-    #   command = Edit.new(env, 'es', 'Artículo')
+    #   command = Cd.new(env, 'models.bla')
     #   command.execute
     #
     class Cd
@@ -29,7 +29,11 @@ module Mayl
         when "."
           @env.namespace = ""
         else
-          @env.namespace << '.' << @path
+          if @env.namespace.empty?
+            @env.namespace = @path
+          else
+            @env.namespace += '.' << @path
+          end
         end
         nil
       end
