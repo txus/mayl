@@ -41,5 +41,11 @@ module Mayl
 
       @locale.commit
     end
+
+    it 'peeks the contents of a given key' do
+      @locale.peek('activerecord').must_equal ['models']
+      @locale.peek('activerecord.models').must_equal ['post']
+      @locale.peek('activerecord.models.post').must_equal nil
+    end
   end
 end

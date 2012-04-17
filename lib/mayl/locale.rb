@@ -55,6 +55,15 @@ module Mayl
       end
     end
 
+    # Public: Returns an Array of nodes inside a key, or nil if the key
+    # represents a leaf.
+    def peek(key)
+      result = get(key)
+      if result.is_a?(Hash)
+        result.keys
+      end
+    end
+
     # Public: Saves any changes to disk.
     #
     # Returns nothing.
