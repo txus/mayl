@@ -3,7 +3,7 @@ require 'test_helper'
 module Mayl
   describe Repl do
     before do
-      @repl = Mayl::Repl.new
+      @repl = Mayl::Repl.new('some/path.yml')
     end
 
     it 'parses and executes commands' do

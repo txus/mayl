@@ -46,7 +46,7 @@ module Mayl
       # Public: Returns the given String key according to the qualified
       # namespace we are in.
       def qualified_key
-        [@env.namespace.to_s, @key].join('.')
+        [@env.namespace.to_s, @key].reject(&:empty?).compact.join('.')
       end
     end
   end

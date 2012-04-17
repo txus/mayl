@@ -7,6 +7,10 @@ module Mayl
       @locale = Locale.new('some/ca.yml', hash)
     end
 
+    it 'gets a key' do
+      @locale.get('activerecord.models.post').must_equal 'Article'
+    end
+
     it 'sets and retrieves a given key' do
       @locale.set('activerecord.models.comment', 'Comentari')
       @locale.get('activerecord.models.comment').must_equal 'Comentari'

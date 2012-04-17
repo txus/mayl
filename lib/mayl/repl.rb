@@ -7,7 +7,8 @@ module Mayl
     # Public: Initializes a new REPL from a given path.
     #
     # path - The path to get the locales from (defaults to 'config/locales').
-    def initialize(path='config/locales')
+    def initialize(path)
+      path ||= 'config/locales'
       @env    = Env.new(path)
       @parser = Parser.new(@env)
     end

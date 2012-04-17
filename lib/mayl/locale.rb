@@ -35,13 +35,13 @@ module Mayl
       qualifier = ary[0..-2]
       name      = ary.last
 
-      path = qualifier.inject(@data) do |acc, name|
-        acc[name] ||= {}
+      _data = @data
+      qualifier.each do |path|
+        _data = _data[path]
       end
+      _data[name] = value
 
       @dirty = true
-
-      path[name] = value
     end
 
     # Public: Gets the value for a given key.
@@ -64,6 +64,11 @@ module Mayl
       File.open(@path, 'w') do |f|
         f.write YAML.dump({ @name.to_s => @data })
       end
+    end
+
+    # Public: Returns a String representation of the Locale.
+    def to_s
+      @name
     end
   end
 end

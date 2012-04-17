@@ -13,5 +13,10 @@ module Mayl
     def commit
       @locales.each(&:commit)
     end
+
+    # Public: The current namespace. For now it's just an empty slime.
+    def namespace
+      ""
+    end
   end
 end

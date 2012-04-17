@@ -30,7 +30,12 @@ module Mayl
       # Returns nothing.
       def execute
         locales.each do |locale|
-          print "  #{locale}: #{locale.get qualified_key}\n"
+          result = locale.get qualified_key
+          if result.is_a? String
+            print "  #{locale.to_s}: #{result}\n"
+          else
+            print "  #{locale.to_s}: (empty)\n"
+          end
         end
       end
 
@@ -46,7 +51,7 @@ module Mayl
       # Public: Returns the given String key according to the qualified
       # namespace we are in.
       def qualified_key
-        [@env.namespace.to_s, @key].join('.')
+        [@env.namespace.to_s, @key].reject(&:empty?).compact.join('.')
       end
     end
   end
