@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 $: << 'lib'
 require 'mayl'
+
+Mayl::Repl.new.start ARGV[1]
