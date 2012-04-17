@@ -2,4 +2,4 @@
 $: << 'lib'
 require 'mayl'
 
-Mayl::Repl.new(ARGV[1]).start
+Mayl::Repl.new(ARGV[0]).start

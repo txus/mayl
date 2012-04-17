@@ -8,7 +8,7 @@ module Mayl
     #
     # path - The path to get the locales from (defaults to 'config/locales').
     def initialize(path)
-      path ||= 'config/locales'
+      path    ||= 'config/locales'
       @env    = Env.new(path)
       @parser = Parser.new(@env)
     end
@@ -20,7 +20,7 @@ module Mayl
       locales = @env.locales.map(&:name)
       prompt = "> "
       puts "Detected locales: #{locales.join(', ')}"
-      while (print prompt; input = gets)
+      while (print prompt; input = $stdin.gets)
         begin
           value = @parser.parse(input.chomp).execute
           @env.last_value = value

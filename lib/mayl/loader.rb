@@ -17,9 +17,13 @@ module Mayl
     #
     # Returns an Array of Locale objects.
     def self.load(path)
-      Dir[File.expand_path(path) << "/*.yml"].map { |filename|
+      locales = Dir[File.expand_path(path) << "/*.yml"].map { |filename|
         Locale.new filename, YAML.load(File.read(filename))
       }
+
+      abort "Error: No locales found under ./#{path}" if locales.empty?
+
+      locales
     end
   end
 end
