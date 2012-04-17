@@ -20,9 +20,15 @@ module Mayl
       locales = @env.locales.map(&:name)
       puts "Detected locales: #{locales.join(', ')}"
       while (print "> "; input = gets)
-        @parser.parse(input.chomp).execute
-        @env.commit
-        print "\n"
+        begin
+          value = @parser.parse(input.chomp).execute
+          @env.last_value = value
+          @env.commit
+        rescue => e
+          print "Error: #{e.message}"
+        ensure
+          print "\n"
+        end
       end
     end
   end

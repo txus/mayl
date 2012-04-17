@@ -27,7 +27,7 @@ module Mayl
       # Public: Executes the command, iterating over each locale, asking the
       # value for the key, and printing it out.
       #
-      # Returns nothing.
+      # Returns the key.
       def execute
         locales.each do |locale|
           result = locale.get qualified_key
@@ -37,6 +37,7 @@ module Mayl
             print "  #{locale.to_s}: (empty)\n"
           end
         end
+        @key
       end
 
       #######

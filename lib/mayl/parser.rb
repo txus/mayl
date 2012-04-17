@@ -12,7 +12,7 @@ module Mayl
     #
     # Returns a Command.
     def parse(input)
-      operator, operands = input.split
+      operator, *operands = input.split
       klass = Commands.const_get(operator.capitalize)
       klass.new(@env, *Array(operands))
     end

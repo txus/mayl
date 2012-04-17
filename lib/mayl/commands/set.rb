@@ -26,12 +26,13 @@ module Mayl
       # Public: Executes the command, iterating over each locale, asking the
       # user for a value, and setting it.
       #
-      # Returns nothing.
+      # Returns the key.
       def execute
         locales.each do |locale|
-          print "  #{locale}: "
+          print "  #{locale.to_s}: "
           locale.set qualified_key, gets.chomp
         end
+        @key
       end
 
       #######

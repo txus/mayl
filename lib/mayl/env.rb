@@ -3,10 +3,12 @@ module Mayl
   # ability to save locales to disk.
   class Env
     attr_reader :locales
+    attr_accessor :last_value
 
     # Public: Initializes a new Env loading the locales from a path.
     def initialize(path)
-      @locales = Loader.load(path)
+      @locales    = Loader.load(path)
+      @last_value = nil
     end
 
     # Public: Saves any changes to disk.
