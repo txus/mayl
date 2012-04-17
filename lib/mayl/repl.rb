@@ -20,6 +20,7 @@ module Mayl
       puts "Detected locales: #{locales.join(', ')}"
       while (print "> "; input = gets)
         @parser.parse(input.chomp).execute
+        @env.commit
         print "\n"
       end
     end

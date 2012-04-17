@@ -2,10 +2,22 @@ require 'test_helper'
 
 module Mayl
   describe Env do
-    it 'is a container for locales' do
-      Loader.expects(:load).with('my/path').returns [1,2]
+    before do
+      @locales = [stub, stub]
+      Loader.expects(:load).with('my/path').returns @locales
       @env = Mayl::Env.new('my/path')
-      @env.locales.must_equal [1,2]
+    end
+
+    it 'is a container for locales' do
+      @env.locales.must_equal @locales
+    end
+
+    it 'commits changes to disk' do
+      @locales.each do |locale|
+        locale.expects(:commit)
+      end
+
+      @env.commit
     end
   end
 end
