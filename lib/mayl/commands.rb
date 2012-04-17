@@ -6,3 +6,4 @@ module Mayl
 end
 
 require 'mayl/commands/set'
+require 'mayl/commands/get'
