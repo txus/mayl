@@ -18,8 +18,7 @@ module Mayl
     # Returns an Array of Locale objects.
     def self.load(path)
       Dir[File.expand_path(path) << "/*.yml"].map { |filename|
-        name = filename.split('/').last.gsub('.yml','').to_sym
-        Locale.new name, YAML.load(File.read(filename))
+        Locale.new filename, YAML.load(File.read(filename))
       }
     end
   end
