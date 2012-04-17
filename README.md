@@ -3,11 +3,6 @@
 Mayl is an anagram of YAML, and also a console to create, edit and maintain
 YAML files in any kind of Ruby projects.
 
-## Warning: Not released yet
-
-This is not a released project yet. It's just a Readme specification to define
-the API and some features. You'll see a usable version soon! ;)
-
 ## Installation
 
 Install mayl yourself:
@@ -70,8 +65,6 @@ Cool way to navigate your YAML files huh?
 
 ### Other useful commands
 
-* `reload`: Reloads the file in case someone has changed it for some reason
-  (which ideally should not happen).
 * `exit`: Exits the console.
 
 ## Development
