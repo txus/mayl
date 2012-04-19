@@ -12,7 +12,7 @@ module Mayl
       @baz = stub
       @baz.expects(:execute)
 
-      $stdin.expects(:gets).times(3).returns("foo bar\n", "baz lol\n", nil)
+      Readline.expects(:readline).times(3).returns("foo bar\n", "baz lol\n", nil)
 
       @repl.parser.expects(:parse).with('foo bar').returns @foo
       @repl.parser.expects(:parse).with('baz lol').returns @baz

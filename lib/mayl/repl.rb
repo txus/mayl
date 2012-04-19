@@ -1,3 +1,5 @@
+require "readline"
+
 module Mayl
   # Public: The class responsible for reading user input, interpreting it and
   # executing associated commands.
@@ -18,19 +20,31 @@ module Mayl
     # Returns nothing.
     def start
       locales = @env.locales.map(&:name)
+      stty_save = `stty -g`.chomp
       prompt = "> "
       puts "Detected locales: #{locales.join(', ')}"
-      while (print prompt; input = $stdin.gets)
-        begin
-          value = @parser.parse(input.chomp).execute
-          @env.last_value = value
-          @env.commit
-          prompt = [@env.namespace, '> '].reject(&:empty?).join ' '
-        rescue => e
-          print "Error: #{e.message}"
-        ensure
-          print "\n"
+
+      env = @env
+      Readline.completion_proc = proc { |s| Commands.autocomplete(s, env) }
+      Readline.completion_append_character = ''
+      # Readline.completer_word_break_characters = 23.chr
+
+      begin
+        while input = Readline.readline(prompt, true)
+          begin
+            value = @parser.parse(input.chomp).execute
+            @env.last_value = value
+            @env.commit
+            prompt = [@env.namespace, '> '].reject(&:empty?).join ' '
+          rescue => e
+            print "Error: #{e.message}"
+          ensure
+            print "\n"
+          end
         end
+      rescue Interrupt
+        system("stty", stty_save)
+        exit
       end
     end
   end

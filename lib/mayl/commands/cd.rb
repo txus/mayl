@@ -14,6 +14,7 @@ module Mayl
       # path - the path to cd in
       def initialize(env, path)
         @env  = env
+        path = path.split('.').reject(&:empty?).compact.join('.') if path =~ /\w/
         @path = path
       end
 
@@ -29,6 +30,8 @@ module Mayl
         when "."
           @env.namespace = ""
         else
+          check_namespace!
+
           if @env.namespace.empty?
             @env.namespace = @path
           else
@@ -36,6 +39,19 @@ module Mayl
           end
         end
         nil
+      end
+
+      # Public: Checks that you're not trying to enter a leaf.
+      #
+      # Raises an ArgumentError if you are.
+      def check_namespace!
+        namespace = [@env.namespace, @path].reject(&:empty?).join('.')
+        matches   = @env.peek(namespace).compact
+
+        if matches.empty?
+          key = @path.split('.').last
+          raise ArgumentError, "Can't cd to #{key} -- it's a leaf"
+        end
       end
     end
   end

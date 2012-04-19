@@ -11,8 +11,7 @@ module Mayl
       end
 
       it 'prints the current keys inside the namespace' do
-        @locales.first.expects(:peek).with('activerecord').returns ['models']
-        @locales.last.expects(:peek).with('activerecord').returns ['attributes', 'models']
+        @env.expects(:peek).returns ['models', 'attributes']
 
         @command.expects(:print).with('models ')
         @command.expects(:print).with('attributes ')

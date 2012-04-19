@@ -19,9 +19,7 @@ module Mayl
       #
       # Returns nil.
       def execute
-        locales.map { |locale|
-          locale.peek(@env.namespace)
-        }.flatten.uniq.each do |option|
+        @env.peek.each do |option|
           print "#{option} "
         end
         nil
