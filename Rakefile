@@ -14,5 +14,12 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['./test/**/*_test.rb']
 end
 
+require 'reek/rake/task'
+Reek::Rake::Task.new do |t|
+  t.fail_on_error = true
+  t.verbose = false
+  t.source_files = 'lib/**/*.rb'
+end
+
 task :doc => :yard
 task :default => :test

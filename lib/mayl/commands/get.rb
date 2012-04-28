@@ -31,10 +31,11 @@ module Mayl
       def execute
         locales.each do |locale|
           result = locale.get qualified_key
+          name   = locale.to_s
           if result.is_a? String
-            print "  #{locale.to_s}: #{result}\n"
+            print "  #{name}: #{result}\n"
           else
-            print "  #{locale.to_s}: (empty)\n"
+            print "  #{name}: (empty)\n"
           end
         end
         @key

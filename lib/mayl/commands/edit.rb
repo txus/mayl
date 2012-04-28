@@ -28,11 +28,13 @@ module Mayl
       #
       # Returns the key.
       def execute
+        key = qualified_key
         locale = locales.detect do |locale|
           locale.name.to_s == @locale.to_s
         end
-        locale.set @key, @value
-        @key
+
+        locale.set key, @value
+        key
       end
 
       #######

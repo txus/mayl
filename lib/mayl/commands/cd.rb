@@ -22,9 +22,11 @@ module Mayl
       #
       # Returns nil.
       def execute
+        namespace = @env.namespace
+
         case @path
         when ".."
-          ns = @env.namespace.split('.')
+          ns = namespace.split('.')
           ns.pop
           @env.namespace = ns.join('.')
         when "."
@@ -32,7 +34,7 @@ module Mayl
         else
           check_namespace!
 
-          if @env.namespace.empty?
+          if namespace.empty?
             @env.namespace = @path
           else
             @env.namespace += '.' << @path
@@ -41,7 +43,11 @@ module Mayl
         nil
       end
 
-      # Public: Checks that you're not trying to enter a leaf.
+      #######
+      private
+      #######
+
+      # Internal: Checks that you're not trying to enter a leaf.
       #
       # Raises an ArgumentError if you are.
       def check_namespace!
