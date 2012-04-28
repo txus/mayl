@@ -4,6 +4,7 @@ module Mayl
   # Public: The class responsible for reading user input, interpreting it and
   # executing associated commands.
   class Repl
+    include Colors
     attr_reader :parser
 
     # Public: Initializes a new REPL from a given path.
@@ -21,13 +22,12 @@ module Mayl
     def start
       locales = @env.locales.map(&:name)
       stty_save = `stty -g`.chomp
-      prompt = "> "
-      puts "Detected locales: #{locales.join(', ')}"
+      prompt = color(:red, "> ")
+      puts color(:green, "Detected locales: #{locales.join(', ')}")
 
       env = @env
       Readline.completion_proc = proc { |s| Commands.autocomplete(s, env) }
       Readline.completion_append_character = ''
-      # Readline.completer_word_break_characters = 23.chr
 
       begin
         while input = Readline.readline(prompt, true)
@@ -35,7 +35,7 @@ module Mayl
             value = @parser.parse(input.chomp).execute
             @env.last_value = value
             @env.commit
-            prompt = [@env.namespace, '> '].reject(&:empty?).join ' '
+            prompt = color(:red, [@env.namespace, '> '].reject(&:empty?).join(' '))
           rescue => e
             print "Error: #{e.message}"
           ensure
