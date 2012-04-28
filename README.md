@@ -3,7 +3,7 @@
 Mayl is an anagram of YAML, and also an interactive console to create, edit
 and maintain YAML files in any kind of Ruby projects.
 
-![Mayl][https://raw.github.com/txus/mayl/master/screenshot.png]
+![Mayl](https://raw.github.com/txus/mayl/master/screenshot.png)
 
 ## Installation
 
